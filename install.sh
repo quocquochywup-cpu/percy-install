@@ -4,7 +4,7 @@
 set -e  # Dừng nếu có lỗi
 
 echo "================================"
-echo "   Cài Đặt Percy Project"
+echo "   Hồ Cửa Nam Báo Cá Cho Anh Vũ Đen"
 echo "================================"
 echo ""
 
