@@ -75,7 +75,7 @@ echo ""
 echo "🌐 Nhập domain của bạn (VD: example.com)"
 echo "   Nếu có nhiều domain, cách nhau bằng dấu cách"
 echo "   VD: domain1.com domain2.com sub.domain.com"
-read -p "Domain: " USER_DOMAINS
+read -p "Domain: " USER_DOMAINS < /dev/tty
 
 # Kiểm tra domain có được nhập không
 if [ -z "$USER_DOMAINS" ]; then
@@ -120,7 +120,7 @@ echo "✅ Cấu hình Nginx hoàn tất!"
 echo ""
 
 # 16. Hỏi có muốn cài SSL không (ở cuối cùng)
-read -p "🔒 Bạn có muốn cài đặt SSL/HTTPS cho domain không? (y/n): " INSTALL_SSL
+read -p "🔒 Bạn có muốn cài đặt SSL/HTTPS cho domain không? (y/n): " INSTALL_SSL < /dev/tty
 echo ""
 
 if [[ "$INSTALL_SSL" =~ ^[Yy]$ ]]; then
@@ -133,7 +133,7 @@ if [[ "$INSTALL_SSL" =~ ^[Yy]$ ]]; then
     echo ""
     
     # Hỏi email
-    read -p "📧 Nhập email của bạn (để nhận thông báo SSL, hoặc Enter để bỏ qua): " USER_EMAIL
+    read -p "📧 Nhập email của bạn (để nhận thông báo SSL, hoặc Enter để bỏ qua): " USER_EMAIL < /dev/tty
     echo ""
     
     sleep 2
