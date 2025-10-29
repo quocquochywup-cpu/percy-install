@@ -36,25 +36,17 @@ systemctl enable nginx
 echo "📦 Đang cài đặt unrar..."
 apt install -y unrar
 
-# 6. Giải nén file percy.rar
-echo "📦 Đang giải nén percy.rar trong /home..."
-cd /home
+# 6. Di chuyển đến thư mục project
+echo "📂 Chuyển đến thư mục /home/percy..."
+cd /home/percy
+
+# 7. Giải nén file percy.rar
+echo "📦 Đang giải nén percy.rar..."
 unrar x percy.rar -y
 
 # Đợi giải nén hoàn tất
 echo "⏳ Đang đợi giải nén hoàn tất..."
 sleep 2
-
-# Kiểm tra thư mục percy đã được tạo chưa
-if [ ! -d "/home/percy" ]; then
-    echo "❌ Lỗi: Thư mục /home/percy không tồn tại sau khi giải nén!"
-    echo "Vui lòng kiểm tra file percy.rar"
-    exit 1
-fi
-
-# 7. Di chuyển đến thư mục project
-echo "📂 Chuyển đến thư mục /home/percy..."
-cd /home/percy
 
 # 8. Cài đặt npm packages
 echo "📦 Đang cài đặt npm packages..."
