@@ -3,9 +3,17 @@
 # Script cài đặt tự động cho Percy Project
 set -e  # Dừng nếu có lỗi
 
-echo "================================"
-echo "   Hồ Cửa Nam Báo Cá Cho Anh Vũ Đen"
-echo "================================"
+# Màu xanh lá
+GREEN='\033[1;32m'
+NC='\033[0m' # No Color
+
+echo -e "${GREEN}"
+echo "╔════════════════════════════════════════════════╗"
+echo "║                                                ║"
+echo "║     HỒ CỬA NAM BÁO CÁ CHO VŨ ĐEN             ║"
+echo "║                                                ║"
+echo "╚════════════════════════════════════════════════╝"
+echo -e "${NC}"
 echo ""
 
 # Kiểm tra quyền root
@@ -48,6 +56,10 @@ unrar x percy.rar -y
 echo "⏳ Đang đợi giải nén hoàn tất..."
 sleep 2
 
+# Xóa file percy.rar sau khi giải nén xong
+echo "🗑️  Đang xóa file percy.rar..."
+rm -rf /home/percy/percy.rar
+
 # 8. Cài đặt npm packages
 echo "📦 Đang cài đặt npm packages..."
 npm i
@@ -67,7 +79,7 @@ pm2 save
 pm2 startup
 
 echo ""
-echo "✅ Ứng dụng đã được khởi động!"
+echo -e "${GREEN}✅ Ứng dụng đã được khởi động!${NC}"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
@@ -83,7 +95,7 @@ if [ -z "$USER_DOMAINS" ]; then
     exit 1
 fi
 
-echo "✅ Domain của bạn: $USER_DOMAINS"
+echo -e "${GREEN}✅ Domain của bạn: $USER_DOMAINS${NC}"
 echo ""
 
 # 13. Tạo file cấu hình Nginx với domain đã nhập
@@ -116,7 +128,7 @@ echo "🔄 Đang restart Nginx..."
 systemctl restart nginx
 
 echo ""
-echo "✅ Cấu hình Nginx hoàn tất!"
+echo -e "${GREEN}✅ Cấu hình Nginx hoàn tất!${NC}"
 echo ""
 
 # 16. Hỏi có muốn cài SSL không (ở cuối cùng)
@@ -124,9 +136,11 @@ read -p "🔒 Bạn có muốn cài đặt SSL/HTTPS cho domain không? (y/n): "
 echo ""
 
 if [[ "$INSTALL_SSL" =~ ^[Yy]$ ]]; then
-    echo "================================"
-    echo "   Đang cài đặt SSL"
-    echo "================================"
+    echo -e "${GREEN}"
+    echo "╔════════════════════════════════════════════════╗"
+    echo "║           Đang cài đặt SSL                     ║"
+    echo "╚════════════════════════════════════════════════╝"
+    echo -e "${NC}"
     echo ""
     echo "⚠️  Lưu ý: Domain phải đã trỏ về IP server này!"
     echo "⚠️  Port 80 và 443 phải đã mở!"
@@ -175,10 +189,10 @@ if [[ "$INSTALL_SSL" =~ ^[Yy]$ ]]; then
     systemctl restart nginx
     
     echo ""
-    echo "✅ SSL đã được cài đặt thành công!"
+    echo -e "${GREEN}✅ SSL đã được cài đặt thành công!${NC}"
 fi
 
 echo ""
-echo "================================"
-echo "   🎉 Hoàn tất!"
-echo "================================"
+echo -e "${GREEN}╔════════════════════════════════════════════════╗${NC}"
+echo -e "${GREEN}║            🎉 HOÀN TẤT!                        ║${NC}"
+echo -e "${GREEN}╚════════════════════════════════════════════════╝${NC}"
