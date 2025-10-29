@@ -32,23 +32,32 @@ echo "🚀 Đang khởi động Nginx..."
 systemctl start nginx
 systemctl enable nginx
 
-# 5. Di chuyển đến thư mục project
+# 5. Cài đặt unrar để giải nén
+echo "📦 Đang cài đặt unrar..."
+apt install -y unrar
+
+# 6. Giải nén file percy.rar
+echo "📦 Đang giải nén percy.rar..."
+cd /home
+unrar x percy.rar
+
+# 7. Di chuyển đến thư mục project
 echo "📂 Chuyển đến thư mục /home/percy..."
 cd /home/percy
 
-# 6. Cài đặt npm packages
+# 8. Cài đặt npm packages
 echo "📦 Đang cài đặt npm packages..."
 npm i
 
-# 7. Cài đặt PM2 global
+# 9. Cài đặt PM2 global
 echo "📦 Đang cài đặt PM2..."
 npm i pm2 -g
 
-# 8. Build project
+# 10. Build project
 echo "🔨 Đang build project..."
 npm run build
 
-# 9. Khởi động ứng dụng với PM2
+# 11. Khởi động ứng dụng với PM2
 echo "🚀 Đang khởi động ứng dụng..."
 pm2 start "npm run start" --name percy-app
 pm2 save
@@ -59,7 +68,7 @@ echo "✅ Ứng dụng đã được khởi động!"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo ""
 
-# 10. Nhập domain SAU KHI PM2 đã chạy
+# 12. Nhập domain SAU KHI PM2 đã chạy
 echo "🌐 Nhập domain của bạn (VD: example.com)"
 echo "   Nếu có nhiều domain, cách nhau bằng dấu cách"
 echo "   VD: domain1.com domain2.com sub.domain.com"
@@ -74,7 +83,7 @@ fi
 echo "✅ Domain của bạn: $USER_DOMAINS"
 echo ""
 
-# 11. Tạo file cấu hình Nginx với domain đã nhập
+# 13. Tạo file cấu hình Nginx với domain đã nhập
 echo "⚙️  Đang tạo cấu hình Nginx với domain: $USER_DOMAINS"
 cat > /etc/nginx/conf.d/percy.conf << 'EOF'
 server {
@@ -95,11 +104,11 @@ EOF
 # Thay thế placeholder bằng domain thực
 sed -i "s/USER_DOMAINS_PLACEHOLDER/$USER_DOMAINS/g" /etc/nginx/conf.d/percy.conf
 
-# 12. Kiểm tra cấu hình Nginx
+# 14. Kiểm tra cấu hình Nginx
 echo "✅ Đang kiểm tra cấu hình Nginx..."
 nginx -t
 
-# 13. Restart Nginx
+# 15. Restart Nginx
 echo "🔄 Đang restart Nginx..."
 systemctl restart nginx
 
@@ -107,7 +116,7 @@ echo ""
 echo "✅ Cấu hình Nginx hoàn tất!"
 echo ""
 
-# 14. Hỏi có muốn cài SSL không (ở cuối cùng)
+# 16. Hỏi có muốn cài SSL không (ở cuối cùng)
 read -p "🔒 Bạn có muốn cài đặt SSL/HTTPS cho domain không? (y/n): " INSTALL_SSL
 echo ""
 
