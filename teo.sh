@@ -85,7 +85,7 @@ echo ""
 
 # 13. Tạo file cấu hình Nginx với domain đã nhập
 echo "⚙️  Đang tạo cấu hình Nginx với domain: $USER_DOMAINS"
-cat > /etc/nginx/conf.d/percy.conf << 'EOF'
+cat > /etc/nginx/conf.d/teo.conf << 'EOF'
 server {
     listen 80;
     server_name USER_DOMAINS_PLACEHOLDER;
@@ -100,7 +100,7 @@ server {
 EOF
 
 # Thay thế placeholder bằng domain thực
-sed -i "s/USER_DOMAINS_PLACEHOLDER/$USER_DOMAINS/g" /etc/nginx/conf.d/percy.conf
+sed -i "s/USER_DOMAINS_PLACEHOLDER/$USER_DOMAINS/g" /etc/nginx/conf.d/teo.conf
 
 # 14. Kiểm tra cấu hình Nginx
 echo "✅ Đang kiểm tra cấu hình Nginx..."
